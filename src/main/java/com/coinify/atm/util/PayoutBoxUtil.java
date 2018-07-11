@@ -81,7 +81,7 @@ public class PayoutBoxUtil {
 			totalFund = totalFund + (entry.getKey() * entry.getValue());
 		}
 
-		return totalFund > amount;
+		return totalFund >= amount;
 
 	}
 

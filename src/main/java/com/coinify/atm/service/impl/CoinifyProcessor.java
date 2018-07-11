@@ -44,9 +44,15 @@ public class CoinifyProcessor implements IProcessor {
 		for (Map.Entry<Integer, Integer> item : PayoutBoxUtil.getAvailablePayouts().entrySet()) {
 
 			Integer unitFactor = amount / item.getKey();
-			if (unitFactor == 0 || unitFactor > item.getValue())
+			if (unitFactor == 0 )
 				continue;
-
+			
+			if(unitFactor > item.getValue()) {
+				notesAndCoinsResult.put(item.getKey(),item.getValue());
+				amount=amount-item.getKey()*item.getValue();
+				continue;
+			}
+				
 			notesAndCoinsResult.put(item.getKey(), amount / item.getKey());
 			amount = amount % item.getKey();
 		}
